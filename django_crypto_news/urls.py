@@ -9,6 +9,7 @@ urlpatterns = [
     path('', include('crypto.urls')),
     path('', include('weather.urls')),
     path('', include('news.urls')),
+    path('', include('users.urls')),
 ]
 
 

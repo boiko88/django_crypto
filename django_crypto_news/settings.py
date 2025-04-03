@@ -137,3 +137,7 @@ CACHES = {
         "LOCATION": "redis://localhost:6379/1",
     }
 }
+
+# Redirect to the home page after login and logout
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
