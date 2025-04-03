@@ -6,7 +6,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('crypto.urls')),  # This ensures the root '/' is routed to crypto app
+    path('', include('crypto.urls')),
+    path('', include('weather.urls')),
 ]
 
 
