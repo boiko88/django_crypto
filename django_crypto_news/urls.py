@@ -8,6 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('crypto.urls')),
     path('', include('weather.urls')),
+    path('', include('news.urls')),
 ]
 
 

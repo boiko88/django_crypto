@@ -18,6 +18,7 @@ SECRET_KEY = 'django-insecure-b$p_c!nby^9kss&8d+0%*=0+y5u+hr1d76hbyflaf_vanq16cy
 
 WEATHER_KEY = os.getenv('WEATHER_KEY')
 COINMARKETCAP_KEY = os.getenv('COINMARKETCAP_KEY')
+NEWS_API_KEY = os.getenv('NEWS_API_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -34,8 +35,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'crypto',
     'weather',
+    'news',
 ]
 
 MIDDLEWARE = [
@@ -62,6 +65,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'weather.context_processors.weather_data',
+                'crypto.context_processors.crypto_rates',
             ],
         },
     },
