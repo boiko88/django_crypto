@@ -17,6 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-b$p_c!nby^9kss&8d+0%*=0+y5u+hr1d76hbyflaf_vanq16cy'
 
 WEATHER_KEY = os.getenv('WEATHER_KEY')
+COINMARKETCAP_KEY = os.getenv('COINMARKETCAP_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

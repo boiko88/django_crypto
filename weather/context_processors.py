@@ -4,7 +4,7 @@ import requests
 
 
 def fetch_weather_api():
-    """ Function to fetch data from the weather API. """
+    ''' Function to fetch data from the weather API. '''
     MAIN_URL = 'http://api.openweathermap.org/data/2.5/weather?'
     API_KEY = conf_settings.WEATHER_KEY
     CITY = 'lat=55.75&lon=37.61'  # Moscow
@@ -26,8 +26,8 @@ def fetch_weather_api():
 
 
 def weather_data(request):
-    """ Checks cache before making an API request. """
-    cached_weather = cache.get("weather_data")
+    ''' Checks cache before making an API request. '''
+    cached_weather = cache.get('weather_data')
 
     if cached_weather:
         return {'weather': cached_weather}  # Return cached data if available
@@ -36,6 +36,6 @@ def weather_data(request):
     new_weather_data = fetch_weather_api()
 
     if new_weather_data:
-        cache.set("weather_data", new_weather_data, timeout=300)  # Cache for 5 minutes
+        cache.set('weather_data', new_weather_data, timeout=300)  # Cache for 5 minutes
 
     return {'weather': new_weather_data}
