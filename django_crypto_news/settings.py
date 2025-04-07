@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'crypto',
     'weather',
     'news',
+    'users',
 ]
 
 MIDDLEWARE = [
