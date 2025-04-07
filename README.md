@@ -20,7 +20,7 @@ python manage.py migrate
 
 python manage.py runserver
 
-7 Open your web browser and navigate to http://127.0.0.1:8000/ to access the CRM platform.
+7 Open your web browser and navigate to http://127.0.0.1:8000/ to access the platform.
 
 
 Or alternatively you can use Docker. 
