@@ -1,7 +1,9 @@
 from django.contrib.auth.views import LoginView
 from .forms import CustomLoginForm
 from django.views.generic.edit import CreateView
+from django.views.generic import TemplateView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import CustomRegistrationForm
 from django.contrib.auth import login
 
@@ -20,3 +22,7 @@ class CustomRegisterView(CreateView):
         response = super().form_valid(form)
         login(self.request, self.object)
         return response
+
+
+class ProfileView(LoginRequiredMixin, TemplateView):
+    template_name = 'profile.html'
