@@ -1,12 +1,13 @@
 from django.views.generic import TemplateView
 from django.core.cache import cache
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 import requests
 
 from crypto.context_processors import crypto_rates
 
 
-class CryptoPageView(TemplateView):
+class CryptoPageView(LoginRequiredMixin, TemplateView):
     template_name: str = "crypto.html"
 
     def get_context_data(self, **kwargs: any) -> dict[str, any]:

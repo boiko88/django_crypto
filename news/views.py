@@ -1,10 +1,11 @@
 from django.views.generic import TemplateView
 from django.core.cache import cache
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.conf import settings as conf_settings
 import requests
 
 
-class NewsPageView(TemplateView):
+class NewsPageView(LoginRequiredMixin, TemplateView):
     template_name = 'news.html'
 
     def get_context_data(self, **kwargs):

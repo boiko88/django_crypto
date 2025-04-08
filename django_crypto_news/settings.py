@@ -40,9 +40,11 @@ INSTALLED_APPS = [
     'weather',
     'news',
     'users',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -141,6 +143,17 @@ CACHES = {
     }
 }
 
+LOGIN_URL = '/login/'
+
 # Redirect to the home page after login and logout
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+    '172.17.0.1',
+]
+
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': lambda request: True,
+}
