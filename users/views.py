@@ -4,8 +4,10 @@ from django.views.generic.edit import CreateView
 from django.views.generic import TemplateView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import CustomRegistrationForm
 from django.contrib.auth import login
+
+from .forms import CustomRegistrationForm
+from .models import Profile
 
 
 class CustomLoginView(LoginView):
@@ -25,4 +27,11 @@ class CustomRegisterView(CreateView):
 
 
 class ProfileView(LoginRequiredMixin, TemplateView):
+    model = Profile
     template_name = 'profile.html'
+    context_object_name = 'profile'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['profile'] = Profile.objects.get(user=self.request.user)
+        return context

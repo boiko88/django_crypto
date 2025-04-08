@@ -5,6 +5,17 @@
 {% block content %}
     <div class="text-center">
         <h1>Welcome to your profile page!</h1>
+
+         <div class="profile-info">
+{#            <h3>Profile Picture:</h3>#}
+{#            <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="rounded-circle" width="150" height="150">#}
+
+            <h3>Username:</h3>
+            <p>{{ profile.user.username }}</p>
+
+            <!-- Add other profile fields here as needed -->
+        </div>
+
     {% include 'carousel.html' %}
     </div>
 {% endblock %}
