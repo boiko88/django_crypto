@@ -5,6 +5,20 @@
 {% block content %}
     <div class="text-center">
         <h1>Welcome to the Blog!</h1>
-    {% include 'carousel.html' %}
+        {% include 'carousel.html' %}
+        <div class="container mt-4">
+            {% for blog in blogs %}
+                <div class="card mb-3">
+                    <div class="card-body text-start">
+                        <h3>{{ blog.title }}</h3>
+                        <p>{{ blog.body_text|truncatewords:30 }}</p>
+                        <p class="text-muted">Posted on {{ blog.created_at|date:"F j, Y" }}</p>
+                        <a href="#" class="btn btn-primary">Read More</a>  <!-- You can link to slug view later -->
+                    </div>
+                </div>
+            {% empty %}
+                <p>No blog posts yet. Check back soon!</p>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
