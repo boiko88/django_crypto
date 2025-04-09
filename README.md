@@ -1,4 +1,4 @@
-This Django Crypto platform.
+This is a Django Crypto platform.
 
 1 Clone the Repository
 
