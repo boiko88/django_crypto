@@ -12,6 +12,7 @@ urlpatterns = [
     path('', include('weather.urls')),
     path('', include('news.urls')),
     path('', include('users.urls')),
+    path('', include('blog.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
 ]
 
