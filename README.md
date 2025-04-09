@@ -24,3 +24,7 @@ python manage.py runserver
 
 
 Or alternatively you can use Docker. 
+
+docker-compose build
+
+docker-compose up
