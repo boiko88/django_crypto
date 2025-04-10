@@ -8,7 +8,7 @@ import requests
 class NewsPageView(LoginRequiredMixin, TemplateView):
     template_name = 'news.html'
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs: any) -> dict[str, any]:
         context = super().get_context_data(**kwargs)
 
         # Check if news data is in cache

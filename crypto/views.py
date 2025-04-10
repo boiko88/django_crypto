@@ -63,4 +63,4 @@ class CryptoPageView(LoginRequiredMixin, TemplateView):
 
 
 class HomePageView(TemplateView):
-    template_name = 'home.html'
+    template_name: str = 'home.html'

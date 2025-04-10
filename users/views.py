@@ -5,6 +5,7 @@ from django.views.generic import TemplateView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login
+from django.http import HttpResponse
 
 from .forms import CustomRegistrationForm
 from .models import Profile
@@ -20,7 +21,7 @@ class CustomRegisterView(CreateView):
     template_name = 'register.html'
     success_url = reverse_lazy('home')
 
-    def form_valid(self, form):
+    def form_valid(self, form) -> HttpResponse:
         response = super().form_valid(form)
         login(self.request, self.object)
         return response
@@ -31,7 +32,7 @@ class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'profile.html'
     context_object_name = 'profile'
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs: any) -> dict[str, any]:
         context = super().get_context_data(**kwargs)
         context['profile'] = Profile.objects.get(user=self.request.user)
         return context
