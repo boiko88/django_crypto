@@ -49,9 +49,8 @@ body {
 }
 
 .carousel-img {
-    width: 100%;
-    height: auto;
-    max-width: 70%;
+    max-width: 60%;
+    max-height: 480px;
     margin: 0 auto;
     display: block;
 }
