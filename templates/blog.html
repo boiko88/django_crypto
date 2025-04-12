@@ -19,6 +19,9 @@
                     <div class="card-body text-start">
                         <h3>{{ blog.title }}</h3>
                         <p>{{ blog.body_text|truncatewords:30 }}</p>
+                        <div class="col-md-3">
+                            <img src="{{ blog.blog_picture.url }}" alt="Blog Image" class="img-fluid rounded">
+                        </div>
                         <p class="text-muted">Posted on {{ blog.created_at|date:"F j, Y" }}</p>
                         <a href="#" class="btn btn-primary">Read More</a>
 
