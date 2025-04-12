@@ -35,40 +35,23 @@ class BlogPageView(LoginRequiredMixin, ListView):
 
     # Handle Like/Dislike action directly on the list page
     def post(self, request, *args, **kwargs):
-        action = request.POST.get('action')
+        action = request.POST.get('action')  # 'like' or 'dislike'
         blog_id = request.POST.get('blog_id')
         blog = Blog.objects.get(id=blog_id)
 
-        # Check if the user already has a reaction to the blog
-        reaction_exists = BlogReaction.objects.filter(user=request.user, blog=blog).exists()
+        try:
+            reaction = BlogReaction.objects.get(user=request.user, blog=blog)
 
-        if not reaction_exists:
-            # Create a new reaction
-            if action == 'like':
-                BlogReaction.objects.create(user=request.user, blog=blog, reaction=BlogReaction.LIKE)
-            elif action == 'dislike':
-                BlogReaction.objects.create(user=request.user, blog=blog, reaction=BlogReaction.DISLIKE)
+            if reaction.reaction == action:
+                # If same reaction clicked again, remove it (toggle off)
+                reaction.delete()
+            else:
+                # If different reaction clicked, update it
+                reaction.reaction = action
+                reaction.save()
+
+        except BlogReaction.DoesNotExist:
+            # No reaction exists yet, create new
+            BlogReaction.objects.create(user=request.user, blog=blog, reaction=action)
 
         return redirect('blog')
-
-
-# class BlogDetailView(LoginRequiredMixin, DetailView):
-#     model = Blog
-#     template_name = 'blog_detail.html'
-#     context_object_name = 'blog'
-#
-#     def post(self, request, *args, **kwargs):
-#         blog = self.get_object()
-#         action = request.POST.get('action')
-#
-#         # Check if the user already has a reaction to the blog
-#         reaction_exists = BlogReaction.objects.filter(user=request.user, blog=blog).exists()
-#
-#         if not reaction_exists:
-#             # Create a new reaction
-#             if action == 'like':
-#                 BlogReaction.objects.create(user=request.user, blog=blog, reaction=BlogReaction.LIKE)
-#             elif action == 'dislike':
-#                 BlogReaction.objects.create(user=request.user, blog=blog, reaction=BlogReaction.DISLIKE)
-#
-#         return redirect('blog_detail', pk=blog.pk)
