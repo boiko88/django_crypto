@@ -62,3 +62,38 @@ body {
     object-position: center;
     border-radius: 8px;
 }
+
+.search-box {
+        display: flex;
+        justify-content: center;
+        margin: 20px auto;
+        width: 100%;
+        max-width: 500px;
+    }
+
+.search-txt {
+    width: 100%;
+    padding: 12px 20px;
+    border: 2px solid #333;
+    border-radius: 30px;
+    background-color: white;
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-txt::placeholder {
+    color: #aaa;
+}
+
+.search-txt:hover {
+    border-color: #555;
+    background-color: #111;
+}
+
+.search-txt:focus {
+    border-color: #fff;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+    background-color: #111;
+}

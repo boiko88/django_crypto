@@ -5,6 +5,14 @@
 {% block content %}
     <div class="text-center">
         <h1>Welcome to the Blog!</h1>
+
+        <!-- Search -->
+        <form method="GET" action="{% url 'blog' %}">
+            <div class="search-box">
+                <input class="search-txt" type="text" name="q" placeholder="Type to search" value="{{ query }}">
+            </div>
+        </form>
+
         <div class="container mt-4">
             {% for blog in blogs %}
                 <div class="card mb-3">
