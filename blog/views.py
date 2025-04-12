@@ -9,3 +9,4 @@ class BlogPageView(LoginRequiredMixin, ListView):
     template_name = 'blog.html'
     context_object_name = 'blogs'
     ordering = ['-created_at']
+    paginate_by = 2
