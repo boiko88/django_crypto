@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from django.contrib.auth.models import User
 
 
 class Blog(models.Model):
@@ -22,3 +23,20 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class BlogReaction(models.Model):
+    LIKE = 'like'
+    DISLIKE = 'dislike'
+
+    REACTION_CHOICES = [
+        (LIKE, 'like'),
+        (DISLIKE, 'dislike')
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    reaction = models.CharField(max_length=7, choices=REACTION_CHOICES)
+
+    class Meta:
+        unique_together = ('user', 'blog')  # It makes sure we have only 1 reaction for each user per blog
