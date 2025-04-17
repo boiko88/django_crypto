@@ -1,4 +1,3 @@
-/* Sticky Footer Fix */
 html, body {
     height: 100%;
     margin: 0;
@@ -55,13 +54,13 @@ body {
     display: block;
 }
 
-/*.news-img {*/
-/*    max-height: 300px;*/
-/*    width: 100%;*/
-/*    object-fit: cover;*/
-/*    object-position: center;*/
-/*    border-radius: 8px;*/
-/*}*/
+.news-img {
+    max-height: 300px;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 8px;
+}
 
 .search-box {
         display: flex;

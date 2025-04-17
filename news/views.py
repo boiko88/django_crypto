@@ -5,7 +5,7 @@ from django.conf import settings as conf_settings
 import requests
 
 
-class NewsPageView(LoginRequiredMixin, TemplateView):
+class NewsPageView(TemplateView):
     template_name = 'news.html'
 
     def get_context_data(self, **kwargs: any) -> dict[str, any]:
