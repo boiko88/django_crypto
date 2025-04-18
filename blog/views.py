@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView
 from django.shortcuts import redirect
 
-from .models import Blog, BlogReaction
+from .models import Blog, BlogReaction, Comment
 
 
 class BlogPageView(LoginRequiredMixin, ListView):
@@ -55,3 +55,25 @@ class BlogPageView(LoginRequiredMixin, ListView):
             BlogReaction.objects.create(user=request.user, blog=blog, reaction=action)
 
         return redirect('blog')
+
+
+class BlogDetailView(DetailView):
+    model = Blog
+    template_name = 'blog_detail.html'
+    context_object_name = 'blog'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comments'] = self.object.comments.all().order_by('-created_at')
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        content = request.POST.get('content')
+        if content and request.user.is_authenticated:
+            Comment.objects.create(
+                blog=self.object,
+                user=request.user,
+                content=content
+            )
+        return redirect('blog_detail', slug=self.object.slug)

@@ -40,4 +40,14 @@ class BlogReaction(models.Model):
     reaction = models.CharField(max_length=7, choices=REACTION_CHOICES)
 
     class Meta:
-        unique_together = ('user', 'blog')  # It makes sure we have only 1 reaction for each user per blog
+        unique_together = ('user', 'blog')
+
+
+class Comment(models.Model):
+    blog = models.ForeignKey('Blog', on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField(max_length=1000)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Comment by {self.user.username} on {self.blog.title}'
