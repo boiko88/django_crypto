@@ -3,6 +3,7 @@ from django.views.generic import ListView, DetailView
 from django.shortcuts import redirect
 
 from .models import Blog, BlogReaction, Comment
+from .forms import CommentForm
 
 
 class BlogPageView(LoginRequiredMixin, ListView):
@@ -64,16 +65,16 @@ class BlogDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['comments'] = self.object.comments.all().order_by('-created_at')
+        context['form'] = CommentForm()
         return context
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        content = request.POST.get('content')
-        if content and request.user.is_authenticated:
-            Comment.objects.create(
-                blog=self.object,
-                user=request.user,
-                content=content
-            )
-        return redirect('blog_detail', slug=self.object.slug)
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.blog = self.object
+            comment.user = request.user
+            comment.save()
+            return redirect('blog_detail', slug=self.object.slug)
+        return self.render_to_response(self.get_context_data(form=form))
