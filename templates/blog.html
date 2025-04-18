@@ -29,8 +29,8 @@
                         <form method="POST" action="{% url 'blog' %}">
                             {% csrf_token %}
                             <input type="hidden" name="blog_id" value="{{ blog.id }}">
-                            <button type="submit" name="action" value="like" class="btn btn-success mt-2">Like</button>
-                            <button type="submit" name="action" value="dislike" class="btn btn-danger mt-2">Dislike</button>
+                            <button type="submit" name="action" value="like" class="btn btn-success mt-2">👍 Like</button>
+                            <button type="submit" name="action" value="dislike" class="btn btn-danger mt-2">👎 Dislike</button>
                         </form>
                         <!-- Reaction Count -->
                         <p>Likes: {{ blog.likes_count }} | Dislikes: {{ blog.dislikes_count }}</p>

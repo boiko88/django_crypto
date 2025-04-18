@@ -18,16 +18,6 @@
             <!-- Created At -->
             <p class="text-muted">Posted on {{ blog.created_at|date:"F j, Y" }}</p>
 
-            <!-- Like/Dislike Buttons -->
-            <form method="POST" action="{% url 'blog' %}">
-                {% csrf_token %}
-                <input type="hidden" name="blog_id" value="{{ blog.id }}">
-                <button type="submit" name="action" value="like" class="btn btn-success">👍 Like</button>
-                <button type="submit" name="action" value="dislike" class="btn btn-danger">👎 Dislike</button>
-            </form>
-
-            <!-- Reaction Count -->
-            <p class="mt-2">Likes: {{ blog.likes_count }} | Dislikes: {{ blog.dislikes_count }}</p>
         </div>
     </div>
 
