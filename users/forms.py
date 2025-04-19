@@ -14,6 +14,11 @@ class CustomRegistrationForm(UserCreationForm):
         widget=forms.TextInput(attrs={'placeholder': 'Username'}),
         label="Username"
     )
+    email = forms.EmailField(  # ← Add this field
+        widget=forms.EmailInput(attrs={'placeholder': 'Email'}),
+        label="Email",
+        required=True
+    )
     password1 = forms.CharField(
         label='Password',
         widget=forms.PasswordInput(attrs={'placeholder': 'Password'})
@@ -25,4 +30,4 @@ class CustomRegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['username', 'password1', 'password2']
+        fields = ['username', 'email', 'password1', 'password2']
