@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card mb-3">
+        <div class="card-body">
+            <!-- Blog Title -->
+            <h2 class="card-title">{{ blog.title }}</h2>
+
+            <!-- Blog Image -->
+            <div class="text-end mb-3">
+                <img src="{{ blog.blog_picture.url }}" alt="Blog Image" class="img-fluid rounded" style="max-width: 200px;">
+            </div>
+
+            <!-- Blog Body -->
+            <p class="card-text">{{ blog.body_text }}</p>
+
+            <!-- Created At -->
+            <p class="text-muted">Posted on {{ blog.created_at|date:"F j, Y" }}</p>
+
+        </div>
+    </div>
+
+    <!-- Comments Section -->
+    <div class="card mt-4">
+        <div class="card-body">
+            <h4>💬 Leave a Comment</h4>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary mt-2">Post Comment</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Existing Comments -->
+    <div class="mt-4">
+        <h4>🗨️ Comments</h4>
+        {% for comment in blog.comments.all %}
+            <div class="border rounded p-2 mb-2">
+                <strong>{{ comment.user.username }}</strong>
+                <small class="text-muted">{{ comment.created_at|date:"M d, Y H:i" }}</small>
+                <p class="mb-0">{{ comment.content }}</p>
+            </div>
+        {% empty %}
+            <p class="text-muted">No comments yet. Be the first!</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

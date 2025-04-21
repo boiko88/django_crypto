@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Blog - Crypto Platform{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        <h1>Welcome to the Blog!</h1>
+
+        <!-- Search -->
+        <form method="GET" action="{% url 'blog' %}">
+            <div class="search-box">
+                <input class="search-txt" type="text" name="q" placeholder="Type to search" value="{{ query }}">
+            </div>
+        </form>
+
+        <div class="container mt-4">
+            {% for blog in blogs %}
+                <div class="card mb-3">
+                    <div class="card-body text-start">
+                        <h3>{{ blog.title }}</h3>
+                        <p>{{ blog.body_text|truncatewords:30 }}</p>
+                        <div class="col-md-3">
+                            <img src="{{ blog.blog_picture.url }}" alt="Blog Image" class="img-fluid rounded">
+                        </div>
+                        <p class="text-muted">Posted on {{ blog.created_at|date:"F j, Y" }}</p>
+                        <p>🗨️ {{ blog.comments.count }} comment{{ blog.comments.count|pluralize }}</p>
+                        <a href="{% url 'blog_detail' slug=blog.slug %}" class="btn btn-primary">Read More</a>
+
+                        <!-- Like/Dislike buttons -->
+                        <form method="POST" action="{% url 'blog' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="blog_id" value="{{ blog.id }}">
+                            <button type="submit" name="action" value="like" class="btn btn-success mt-2">👍 Like</button>
+                            <button type="submit" name="action" value="dislike" class="btn btn-danger mt-2">👎 Dislike</button>
+                        </form>
+                        <!-- Reaction Count -->
+                        <p>Likes: {{ blog.likes_count }} | Dislikes: {{ blog.dislikes_count }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <p>No blog posts yet. Check back soon!</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Pagination -->
+            {% if is_paginated %}
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center mt-4">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page=1">&laquo; First</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&lsaquo; Prev</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled"><span class="page-link">&laquo; First</span></li>
+                            <li class="page-item disabled"><span class="page-link">&lsaquo; Prev</span></li>
+                        {% endif %}
+
+                        <li class="page-item disabled">
+                            <span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                        </li>
+
+                        {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next &rsaquo;</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled"><span class="page-link">Next &rsaquo;</span></li>
+                            <li class="page-item disabled"><span class="page-link">Last &raquo;</span></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

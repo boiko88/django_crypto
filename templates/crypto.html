@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Crypto{% endblock %}
+
+{% block content %}
+    <div class="container text-center">
+        <h1>Crypto Market Rates</h1>
+        <hr>
+
+        {% if crypto_rates or bybit_crypto_rates %}
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Cryptocurrency</th>
+                    <th>Price (USDT)</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if crypto_rates %}
+                    {% for coin, price in crypto_rates.items %}
+                        <tr>
+                            <td>{{ coin }} Coinmarketcap</td>
+                            <td>${{ price }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+
+                {% if bybit_crypto_rates %}
+                    {% for coin, price in bybit_crypto_rates.items %}
+                        <tr>
+                            <td>{{ coin }}</td>
+                            <td>${{ price }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Failed to fetch cryptocurrency data. Please try again later.</p>
+        {% endif %}
+    </div>
+{% endblock %}
