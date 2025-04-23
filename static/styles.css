@@ -100,10 +100,32 @@ body {
 }
 
 
+/*REGISTER
+***********/
+
+.btn {
+    background-color: #000;
+    color: #fff;
+
+ transition: background-color .3s ease;
+ border: none;
+}
+
+.btn:hover {
+    background-color: #ffc107;
+   /* background-color: #fff;
+    color: #000;*/
+}
+
+
+
 
 /*NAV
 ************/
-
+.nav {
+    margin: 0;
+    padding: 0;
+}
 
 
 .nav-item {
@@ -117,11 +139,50 @@ body {
 }
 
 .header-logo {
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 100px;
     margin-right: 30px;
 }
 
 .btn-danger {
     margin-right: 20px;
+}
+
+/*CAROUSEL
+*********/
+
+.carousel {
+    display: flex;
+    flex-direction: row;
+    width: 1296px;
+
+    -ms-overflow-style: none;  /* IE и Edge */
+  scrollbar-width: none;
+
+overflow-x: scroll;
+scroll-snap-type: x mandatory;
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel >img {
+scroll-snap-align: center;
+}
+
+.carousel-img {
+    border-radius: 20px;
+}
+
+.carousel-img {
+    margin-top: 20px;
+}
+
+/*FOOTER
+***********/
+
+.footer-text {
+    font-size: 20px;
+    font-weight: bold;
 }
