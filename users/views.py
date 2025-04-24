@@ -3,6 +3,7 @@ from .forms import CustomLoginForm
 from django.views.generic.edit import CreateView
 from django.views.generic import TemplateView
 from django.urls import reverse_lazy
+from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login
 from django.http import HttpResponse
@@ -38,3 +39,15 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         context['profile'] = Profile.objects.get(user=self.request.user)
         context['map_html'] = profile.generate_map()
         return context
+
+    def post(self, request, *args, **kwargs):
+        profile = Profile.objects.get(user=request.user)
+        new_address = request.POST.get('address')
+
+        if new_address and new_address != profile.address:
+            profile.address = new_address
+            profile.latitude = None
+            profile.longitude = None
+            profile.save()
+
+        return redirect('profile')

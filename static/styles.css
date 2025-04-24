@@ -219,7 +219,7 @@ scroll-snap-align: center;
 /*Folium Map
 ***********/
 .map-container {
-    width: 400px;
+    width: 680px;
     height: 400px;
     margin: 0 auto;
     border-radius: 8px;

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from geopy.geocoders import Nominatim
 
 import folium
 
@@ -10,6 +11,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_picture = models.ImageField(upload_to='profiles/', default='profiles/default_profile.jpeg')
     email = models.EmailField(null=True, blank=True)
+    address = models.CharField(max_length=255, blank=True, null=True, default="Singapore")
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
 
@@ -26,3 +28,13 @@ class Profile(models.Model):
             ).add_to(m)
             return m._repr_html_()
         return "<p>No location data available.</p>"
+
+    def save(self, *args, **kwargs):
+        # If address exists and lat/lng is not manually set
+        if self.address and (self.latitude is None or self.longitude is None):
+            geolocator = Nominatim(user_agent="django_folium_app")
+            location = geolocator.geocode(self.address)
+            if location:
+                self.latitude = location.latitude
+                self.longitude = location.longitude
+        super().save(*args, **kwargs)

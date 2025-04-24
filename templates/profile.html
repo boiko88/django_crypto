@@ -17,6 +17,12 @@
             <div class="map-container">
                 {{ map_html|safe }}
             </div>
+             <form method="post">
+                {% csrf_token %}
+                <label for="address">Update your address:</label>
+                <input type="text" name="address" id="address" value="{{ profile.address }}" required>
+                <button type="submit">Update Location</button>
+            </form>
         </div>
     </div>
 {% endblock %}
