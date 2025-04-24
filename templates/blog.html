@@ -13,35 +13,15 @@
             </div>
         </form>
 
-        <div class="container mt-4">
-            {% for blog in blogs %}
-                <div class="card mb-3">
-                    <div class="card-body text-start">
-                        <h3>{{ blog.title }}</h3>
-                        <p>{{ blog.body_text|truncatewords:30 }}</p>
-                        <div class="col-md-3">
-                            <img src="{{ blog.blog_picture.url }}" alt="Blog Image" class="img-fluid rounded">
-                        </div>
-                        <p class="text-muted">Posted on {{ blog.created_at|date:"F j, Y" }}</p>
-                        <p>🗨️ {{ blog.comments.count }} comment{{ blog.comments.count|pluralize }}</p>
-                        <a href="{% url 'blog_detail' slug=blog.slug %}" class="btn btn-primary">Read More</a>
+        <div class="container">
+            <div class="blog">
+                <div class="blog-inner">
+                    <div class="blog-item">
 
-                        <!-- Like/Dislike buttons -->
-                        <form method="POST" action="{% url 'blog' %}">
-                            {% csrf_token %}
-                            <input type="hidden" name="blog_id" value="{{ blog.id }}">
-                            <button type="submit" name="action" value="like" class="btn btn-success mt-2">👍 Like</button>
-                            <button type="submit" name="action" value="dislike" class="btn btn-danger mt-2">👎 Dislike</button>
-                        </form>
-                        <!-- Reaction Count -->
-                        <p>Likes: {{ blog.likes_count }} | Dislikes: {{ blog.dislikes_count }}</p>
                     </div>
-                </div>
-            {% empty %}
-                <p>No blog posts yet. Check back soon!</p>
-            {% endfor %}
-        </div>
-    </div>
+                </div><!--blog inner-->
+            </div><!--blog-->
+        </div><!--container-->
 
     <!-- Pagination -->
             {% if is_paginated %}

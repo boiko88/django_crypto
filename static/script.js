@@ -1,18 +1,29 @@
 const carousel = document.querySelector('.carousel');
-const prevBtn = document.querySelector('.carousel-prev-btn');
-const nextBtn = document.querySelector('.carousel-next-btn');
+let scrollAmount = 550;
+let delay = 3000;
 
-prevBtn.addEventListener('click', () => {
+// Функция для прокрутки
+function scrollCarousel() {
   carousel.scrollBy({
-    left: -130,
+    left: scrollAmount,
+    behavior: 'smooth',
   });
+
+  if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 10) {
+    carousel.scrollTo({ left: 0, behavior: 'smooth' });
+  }
+}
+
+// Запуск автопрокрутки
+let autoScroll = setInterval(scrollCarousel, delay);
+
+// При наведении — остановка
+carousel.addEventListener('mouseenter', () => {
+  clearInterval(autoScroll); // ⛔ Останавливаем таймер
 });
 
-nextBtn.addEventListener('click', () => {
-  carousel.scrollBy({
-    left: 130,
-  });
+// При уходе мышки — снова запускаем
+carousel.addEventListener('mouseleave', () => {
+  autoScroll = setInterval(scrollCarousel, delay); // ▶️ Запускаем снова
 });
 
-
- alert('ALOHA ALOHA ALOHA');

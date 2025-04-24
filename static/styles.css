@@ -117,6 +117,33 @@ body {
     color: #000;*/
 }
 
+.register {
+    display: flex;
+    flex-direction: column;
+    margin-top: 90px;
+    align-items: center;
+    text-align: center;
+}
+
+.register__tittle {
+    margin-bottom: 40px;
+}
+
+/*LOGIN
+*************/
+
+.login {
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    align-items: center;
+    text-align: center;
+}
+
+.login__tittle {
+    margin-bottom: 50px;
+}
+
 
 
 
@@ -155,9 +182,11 @@ body {
     display: flex;
     flex-direction: row;
     width: 1296px;
+    flex-wrap: nowrap;
 
     -ms-overflow-style: none;  /* IE и Edge */
   scrollbar-width: none;
+  scroll-behavior: smooth;
 
 overflow-x: scroll;
 scroll-snap-type: x mandatory;
