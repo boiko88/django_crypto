@@ -13,7 +13,10 @@
             <h3>Username:</h3>
             <p>{{ profile.user.username }}</p>
 
-            <!-- Add other profile fields here as needed -->
+             <h3>Your Location on Map:</h3>
+            <div class="map-container">
+                {{ map_html|safe }}
+            </div>
         </div>
     </div>
 {% endblock %}
