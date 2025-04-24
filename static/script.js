@@ -1,18 +1,28 @@
 const carousel = document.querySelector('.carousel');
-const prevBtn = document.querySelector('.carousel-prev-btn');
-const nextBtn = document.querySelector('.carousel-next-btn');
+let scrollAmount = 550;
+let delay = 3000;
 
-prevBtn.addEventListener('click', () => {
+// Scrool function
+function scrollCarousel() {
   carousel.scrollBy({
-    left: -130,
+    left: scrollAmount,
+    behavior: 'smooth',
   });
+
+  if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 10) {
+    carousel.scrollTo({ left: 0, behavior: 'smooth' });
+  }
+}
+
+// Auto scroll function
+let autoScroll = setInterval(scrollCarousel, delay);
+
+// Stop wile hovering
+carousel.addEventListener('mouseenter', () => {
+  clearInterval(autoScroll); // ⛔ Stop timer
 });
 
-nextBtn.addEventListener('click', () => {
-  carousel.scrollBy({
-    left: 130,
-  });
+// Continues while no hovering
+carousel.addEventListener('mouseleave', () => {
+  autoScroll = setInterval(scrollCarousel, delay); // ▶️ start again
 });
-
-
- alert('ALOHA ALOHA ALOHA');
