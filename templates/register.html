@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="container mt-4">
-    <h2>Register</h2>
+  <div class="register">
+    <h2 class="register__tittle">Register</h2>
     <form method="post">
       {% csrf_token %}
       {{ form.as_p }}
