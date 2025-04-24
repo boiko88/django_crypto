@@ -2,7 +2,7 @@ const carousel = document.querySelector('.carousel');
 let scrollAmount = 550;
 let delay = 3000;
 
-// Scrool function
+// Scroll function
 function scrollCarousel() {
   carousel.scrollBy({
     left: scrollAmount,
