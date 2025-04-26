@@ -13,7 +13,7 @@
             <h3>Username:</h3>
             <p>{{ profile.user.username }}</p>
 
-            {% if is_mentor %}
+            
                 <div class="mentor-badge">
                     <h3>Mentor Status:</h3>
                     <p class="badge bg-success">🌟 Certified Mentor</p>
@@ -21,7 +21,7 @@
                     {% if mentor_info.bio %}
                         <p>Bio: {{ mentor_info.bio }}</p>
                     {% endif %}
-                </div>
+                </div>{% if is_mentor %}
             {% endif %}
 
              <h3>Your Location on Map:</h3>
