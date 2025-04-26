@@ -38,3 +38,25 @@ class Profile(models.Model):
                 self.latitude = location.latitude
                 self.longitude = location.longitude
         super().save(*args, **kwargs)
+
+
+class Mentor(models.Model):
+    profile = models.OneToOneField(Profile, on_delete=models.CASCADE, related_name='mentor_profile')
+    expertise = models.CharField(max_length=200)
+    bio = models.TextField(blank=True, null=True)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    approved = models.BooleanField(default=False)
+    blog_count = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.profile.user.username} - Mentor"
+
+    def increment_blog_count(self):
+        self.blog_count += 1
+        self.save()
+
+    def decrement_blog_count(self):
+        if self.blog_count > 0:
+            self.blog_count -= 1
+            self.save()
