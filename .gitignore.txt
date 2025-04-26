@@ -2,3 +2,5 @@
 .idea
 .env
 .pyc
+*.pyc
+__pycache__
