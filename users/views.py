@@ -9,7 +9,7 @@ from django.contrib.auth import login
 from django.http import HttpResponse
 
 from .forms import CustomRegistrationForm
-from .models import Profile
+from .models import Profile, Mentor
 
 
 class CustomLoginView(LoginView):
@@ -36,8 +36,18 @@ class ProfileView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs: any) -> dict[str, any]:
         context = super().get_context_data(**kwargs)
         profile = Profile.objects.get(user=self.request.user)
-        context['profile'] = Profile.objects.get(user=self.request.user)
+        context['profile'] = profile
         context['map_html'] = profile.generate_map()
+        
+        # Check if user is mentor
+        try:
+            mentor = Mentor.objects.get(profile=profile, is_active=True, approved=True)
+            context['is_mentor'] = True
+            context['mentor_info'] = mentor
+        except Mentor.DoesNotExist:
+            context['is_mentor'] = False
+            context['mentor_info'] = None
+            
         return context
 
     def post(self, request, *args, **kwargs):
