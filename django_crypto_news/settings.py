@@ -71,6 +71,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'weather.context_processors.weather_data',
                 'crypto.context_processors.crypto_rates',
+                'blog.context_processors.is_mentor',
             ],
         },
     },

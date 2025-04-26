@@ -43,6 +43,11 @@
         </div>
     </div>
 
+    <!-- Blog CRUD -->
+    {% if is_mentor %}
+        <a button class="btn btn-primary" href="/api/blogs/">Create new blogs</a>
+    {% endif %}
+
     <!-- Pagination -->
             {% if is_paginated %}
                 <nav aria-label="Page navigation">

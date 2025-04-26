@@ -22,6 +22,9 @@ class Blog(models.Model):
             self.slug = slug
         super().save(*args, **kwargs)
 
+    class Meta:
+        ordering = ['-created_at']
+
     def __str__(self):
         return self.title
 
