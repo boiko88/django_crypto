@@ -1,0 +1,22 @@
+version: "3.13"
+services:
+  app:
+    build: .
+    volumes:
+      - .:/django
+    ports:
+      - 8001:8000
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+    image: app:django_crypto
+    container_name: crypto_django_container
+    command: python manage.py runserver 0.0.0.0:8000
+
+  redis:
+    image: "redis:latest"
+    container_name: redis_container
+    restart: always
+    ports:
+      - "6380:6379"

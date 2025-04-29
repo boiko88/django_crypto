@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Profile - Crypto Platform{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        <h1>Welcome to your profile page!</h1>
+
+         <div class="profile-info">
+            <h3>Profile Picture:</h3>
+            <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="rounded-circle" width="150" height="150">
+
+            <h3>Username:</h3>
+            <p>{{ profile.user.username }}</p>
+
+            
+                <div class="mentor-badge">
+                    <h3>Mentor Status:</h3>
+                    <p class="badge bg-success">🌟 Certified Mentor</p>
+                    <p>Expertise: {{ mentor_info.expertise }}</p>
+                    {% if mentor_info.bio %}
+                        <p>Bio: {{ mentor_info.bio }}</p>
+                    {% endif %}
+                </div>{% if is_mentor %}
+            {% endif %}
+
+             <h3>Your Location on Map:</h3>
+            <div class="map-container">
+                {{ map_html|safe }}
+            </div>
+             <form method="post">
+                {% csrf_token %}
+                <label for="address">Update your address:</label>
+                <input type="text" name="address" id="address" value="{{ profile.address }}" required>
+                <button type="submit" class="btn btn-primary">Update Location</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
