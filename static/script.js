@@ -73,4 +73,3 @@ function currentSlide(n) {
   // Чтобы слайды двигались: можно добавить анимацию через transform
   document.querySelector('.slides').style.transform = `translateX(-${(n-1) * 100}%)`;
 }
->>>>>>> 49c1d749563c4b264d06f2cf3418138d200a600b
