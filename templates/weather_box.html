@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% if weather %}
     <div class="weather-box d-flex align-items-center text-white position-relative">
         <div class="weather-tooltip">
@@ -18,3 +19,25 @@
 {% else %}
     <div class="text-white">Weather data unavailable</div>
 {% endif %}
+=======
+{% if weather %}
+    <div class="weather-box d-flex align-items-center text-white position-relative">
+        <div class="weather-tooltip">
+            <img src="http://openweathermap.org/img/wn/{{ weather.weather_icon }}.png" alt="Weather Icon">
+            <span class="ms-2">{{ weather.temperature }}°C</span>
+
+            <!-- Tooltip Content -->
+            <div class="tooltip-content">
+                <strong>Weather in Moscow</strong><br>
+                🌡️ Temperature: {{ weather.temperature }}°C<br>
+                💨 Wind Speed: {{ weather.wind }} m/s<br>
+                🌪️ Pressure: {{ weather.pressure }} hPa<br>
+                💧 Humidity: {{ weather.humidity }}%<br>
+                🌤️ Condition: {{ weather.main }} {{ weather.description }}
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="text-white">Weather data unavailable</div>
+{% endif %}
+>>>>>>> 49c1d749563c4b264d06f2cf3418138d200a600b

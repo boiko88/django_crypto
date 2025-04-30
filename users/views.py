@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.contrib.auth.views import LoginView
 from .forms import CustomLoginForm
 from django.views.generic.edit import CreateView
@@ -61,3 +62,68 @@ class ProfileView(LoginRequiredMixin, TemplateView):
             profile.save()
 
         return redirect('profile')
+=======
+from django.contrib.auth.views import LoginView
+from .forms import CustomLoginForm
+from django.views.generic.edit import CreateView
+from django.views.generic import TemplateView
+from django.urls import reverse_lazy
+from django.shortcuts import redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import login
+from django.http import HttpResponse
+
+from .forms import CustomRegistrationForm
+from .models import Profile, Mentor
+
+
+class CustomLoginView(LoginView):
+    form_class = CustomLoginForm
+    template_name = 'login.html'
+
+
+class CustomRegisterView(CreateView):
+    form_class = CustomRegistrationForm
+    template_name = 'register.html'
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form) -> HttpResponse:
+        response = super().form_valid(form)
+        login(self.request, self.object)
+        return response
+
+
+class ProfileView(LoginRequiredMixin, TemplateView):
+    model = Profile
+    template_name = 'profile.html'
+    context_object_name = 'profile'
+
+    def get_context_data(self, **kwargs: any) -> dict[str, any]:
+        context = super().get_context_data(**kwargs)
+        profile = Profile.objects.get(user=self.request.user)
+        context['profile'] = profile
+        context['map_html'] = profile.generate_map()
+        
+        # Check if user is mentor
+        try:
+            mentor = Mentor.objects.get(profile=profile, is_active=True, approved=True)
+            context['is_mentor'] = True
+            context['mentor_info'] = mentor
+        except Mentor.DoesNotExist:
+            context['is_mentor'] = False
+            context['mentor_info'] = None
+            
+        return context
+
+    def post(self, request, *args, **kwargs):
+        profile = Profile.objects.get(user=request.user)
+        new_address = request.POST.get('address')
+
+        if new_address and new_address != profile.address:
+            profile.address = new_address
+            profile.latitude = None
+            profile.longitude = None
+            profile.save()
+
+        return redirect('profile')
+>>>>>>> 49c1d749563c4b264d06f2cf3418138d200a600b

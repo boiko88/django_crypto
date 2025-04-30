@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% if crypto_rates %}
     <div class="crypto-box text-white">
         <span>₿ {{ crypto_rates.bitcoin }} $</span> |
@@ -5,4 +6,13 @@
     </div>
 {% else %}
     <div class="text-white">Crypto data unavailable</div>
+=======
+{% if crypto_rates %}
+    <div class="crypto-box text-white">
+        <span>₿ {{ crypto_rates.bitcoin }} $</span> |
+        <span>E {{ crypto_rates.ethereum }} $</span>
+    </div>
+{% else %}
+    <div class="text-white">Crypto data unavailable</div>
+>>>>>>> 49c1d749563c4b264d06f2cf3418138d200a600b
 {% endif %}
