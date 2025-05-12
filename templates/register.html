@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<div class="register__block">
+
   <div class="register">
     <h2 class="register__tittle">Register</h2>
     <form method="post">
@@ -8,5 +11,8 @@
       {{ form.as_p }}
       <button type="submit" class="btn">Register</button>
     </form>
+
   </div>
+</div>
+
 {% endblock %}

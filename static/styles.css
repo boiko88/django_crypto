@@ -13,6 +13,10 @@ body {
 
 .container {
     flex: 1;
+
+    width: 870px;
+
+
 }
 
 .weather-tooltip {
@@ -107,6 +111,7 @@ body {
     background-color: #000;
     color: #fff;
 
+
  transition: background-color .3s ease;
  border: none;
 }
@@ -131,6 +136,9 @@ body {
     align-items: center;
     flex-direction: column;
     margin-top: 90px;
+
+    text-align: center;
+
 
     border: 4px solid transparent;
     border-image: linear-gradient(#ffc107 , #000);
@@ -190,6 +198,13 @@ padding: 15px 15px;
 }
 
 
+.navbar-collapse{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
 .nav-item {
     font-size: 20px;
     font-weight: 700;
@@ -216,6 +231,102 @@ padding: 15px 15px;
 .carousel {
     display: flex;
     flex-direction: row;
+
+    width: 100%;
+    max-width: 870px;
+
+    -ms-overflow-style: none; /* Для IE */
+    scrollbar-width: none; /* Для Firefox */
+    scroll-behavior: smooth;
+    overflow-x: scroll; /* Для горизонтальной прокрутки */
+    scroll-snap-type: x mandatory; /* Для прилипания слайдов */
+  }
+
+  .carousel__block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden; /* Скрывает прокрутку, если она есть */
+  }
+
+  .carousel::-webkit-scrollbar {
+    display: none; /* Скрывает полосы прокрутки в Webkit браузерах */
+  }
+
+  .carousel > img {
+    scroll-snap-align: center; /* Прилипание слайдов */
+  }
+
+  .carousel-img {
+    min-width: 100%;
+    max-width: 100%; /* Все изображения будут адаптироваться под ширину родительского контейнера */
+    flex-shrink: 0; /* Не уменьшать слайды */
+    margin-top: 20px;
+    cursor: pointer; /* Добавить курсор при наведении */
+    transition: 0.5s;
+    scroll-snap-align: center;
+
+  }
+
+  input[type="radio"] {
+    display: none;
+}
+
+#slide1:checked ~ .carousel { transform: translateX(0%); }   /* Первый слайд */
+        #slide2:checked ~ .carousel { transform: translateX(-100%); } /* Второй слайд */
+        #slide3:checked ~ .carousel { transform: translateX(-200%); }
+        #slide4:checked ~ .carousel { transform: translateX(-300%); }
+        #slide5:checked ~ .carousel { transform: translateX(-400%); }
+        #slide6:checked ~ .carousel { transform: translateX(-500%); }
+
+
+        .controls {
+            text-align: center; /* Размещаем точки по центру */
+            margin-top: 10px; /* Добавляем отступ сверху */
+        }
+
+        /* Стиль для точек переключения */
+        .controls label {
+            display: inline-block; /* Размещаем точки в строку */
+            width: 15px; /* Размер точки */
+            height: 15px;
+            background: #ffc107 ; /* Серый цвет точки */
+            border-radius: 50%; /* Делаем точки круглыми */
+            margin: 5px; /* Добавляем небольшой отступ между ними */
+            cursor: pointer; /* Делаем курсор в виде руки при наведении */
+        }
+
+
+       .controls-label {
+        background: #555;
+       }
+  /*
+  .dots {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .dot {
+    height: 10px;
+    width: 10px;
+    margin: 0 4px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+  }
+
+  .dot.active {
+    background-color: #ffc107;
+  }
+
+  ***/
+
+
+.carousel{
    max-width: 1296px;
     flex-wrap: nowrap;
 
@@ -280,6 +391,7 @@ scroll-snap-align: center;
   }
 
 
+
 /*FOOTER
 ***********/
 
@@ -306,4 +418,27 @@ scroll-snap-align: center;
     display: flex;
     flex-direction: row;
     width: 33,33333%;
+
+}
+
+/*blog
+******/
+.page-item {
+    font-weight: bold;
+
+
+}
+
+
+
+.page-link {
+    color: #686868;
+    padding: 15px;
+    text-transform: uppercase;
+}
+
+.page-link:hover {
+    background-color: #ffc107;
+    text-decoration: none;
+    color: #ffffff;
 }
