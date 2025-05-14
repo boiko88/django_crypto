@@ -29,8 +29,8 @@ def fetch_weather_api(lat, lon) -> dict | None:
 
 
 def weather_data(request) -> dict:
-    # Default: Singapore
-    lat, lon = 1.3521, 103.8198  # Singapore coordinates
+    # Default: Singapore with its coordinates
+    lat, lon = 1.3521, 103.8198
 
     if request.user.is_authenticated:
         try:
