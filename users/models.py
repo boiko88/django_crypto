@@ -11,7 +11,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_picture = models.ImageField(upload_to='profiles/', default='profiles/default_profile.jpeg')
     email = models.EmailField(null=True, blank=True)
-    address = models.CharField(max_length=255, blank=True, null=True, default="Singapore")
+    address = models.CharField(max_length=255, blank=True, null=True, default='Singapore')
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
 
@@ -27,12 +27,12 @@ class Profile(models.Model):
                 tooltip=f"{self.user.username}'s Location"
             ).add_to(m)
             return m._repr_html_()
-        return "<p>No location data available.</p>"
+        return '<p>No location data available.</p>'
 
     def save(self, *args, **kwargs):
         # If address exists and lat/lng is not manually set
         if self.address and (self.latitude is None or self.longitude is None):
-            geolocator = Nominatim(user_agent="django_folium_app")
+            geolocator = Nominatim(user_agent='django_folium_app')
             location = geolocator.geocode(self.address)
             if location:
                 self.latitude = location.latitude

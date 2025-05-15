@@ -2,8 +2,6 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from django.contrib.auth import get_user_model
-from .models import Profile, Mentor
 
 
 class CustomLoginForm(AuthenticationForm):
@@ -14,11 +12,11 @@ class CustomLoginForm(AuthenticationForm):
 class CustomRegistrationForm(UserCreationForm):
     username = forms.CharField(
         widget=forms.TextInput(attrs={'placeholder': 'Username'}),
-        label="Username"
+        label='Username'
     )
     email = forms.EmailField(  # ← Add this field
         widget=forms.EmailInput(attrs={'placeholder': 'Email'}),
-        label="Email",
+        label='Email',
         required=True
     )
     password1 = forms.CharField(

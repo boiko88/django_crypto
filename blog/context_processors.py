@@ -1,5 +1,6 @@
 from users.models import Profile, Mentor
 
+
 def is_mentor(request):
     user = request.user
     is_mentor = False

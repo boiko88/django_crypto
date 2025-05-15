@@ -140,12 +140,12 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-REDIS_HOST = os.getenv("REDIS_HOST", "localhost")  # Uses "localhost" when running locally
+REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')  # Uses "localhost" when running locally
 
 CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": "redis://redis:6379/1",
+    'default': {
+        "BACKEND": 'django.core.cache.backends.redis.RedisCache',
+        "LOCATION": 'redis://redis:6379/1',
     }
 }
 
