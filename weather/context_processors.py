@@ -1,5 +1,4 @@
 from django.conf import settings as conf_settings
-from django.core.cache import cache
 
 from users.models import Profile
 from geopy.geocoders import Nominatim
