@@ -53,7 +53,7 @@ class Mentor(models.Model):
     blog_count = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"{self.profile.user.username} - Mentor"
+        return f'{self.profile.user.username} - Mentor'
 
     def increment_blog_count(self):
         self.blog_count += 1
