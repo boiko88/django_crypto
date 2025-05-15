@@ -14,6 +14,9 @@ class Profile(models.Model):
     address = models.CharField(max_length=255, blank=True, null=True, default='Singapore')
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
+    favorite_crypto = models.CharField(max_length=10, blank=True, null=True, help_text='Favorite cryptocurrency symbol (e.g., BTC, ETH)')
+    target_price = models.DecimalField(max_digits=20, decimal_places=2, null=True, blank=True, help_text='Target price to buy the cryptocurrency')
+    price_alert_sent = models.BooleanField(default=False, help_text='Whether the price alert has been sent')
 
     def __str__(self):
         return f"{self.user.username}'s Profile"

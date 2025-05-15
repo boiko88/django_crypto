@@ -7,9 +7,11 @@ from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login
 from django.http import HttpResponse
+from django.contrib import messages
 
 from .forms import CustomRegistrationForm
 from .models import Profile, Mentor
+from .utils import get_crypto_price
 
 
 class CustomLoginView(LoginView):
@@ -47,6 +49,18 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         except Mentor.DoesNotExist:
             context['is_mentor'] = False
             context['mentor_info'] = None
+
+        # Check crypto price if user has set an alert
+        if profile.favorite_crypto and profile.target_price and not profile.price_alert_sent:
+            current_price = get_crypto_price(profile.favorite_crypto)
+            if current_price and current_price >= float(profile.target_price):
+                profile.price_alert_sent = True
+                profile.save()
+                messages.success(
+                    self.request,
+                    f'🎯 Price Alert! {profile.favorite_crypto} has reached your target price of ${profile.target_price}! '
+                    f'Current price: ${current_price:,.2f}'
+                )
             
         return context
 
@@ -59,5 +73,25 @@ class ProfileView(LoginRequiredMixin, TemplateView):
             profile.latitude = None
             profile.longitude = None
             profile.save()
+
+        return redirect('profile')
+
+
+class UpdateCryptoAlertView(LoginRequiredMixin, TemplateView):
+    template_name = 'profile.html'
+
+    def post(self, request, *args, **kwargs):
+        profile = Profile.objects.get(user=request.user)
+        favorite_crypto = request.POST.get('favorite_crypto')
+        target_price = request.POST.get('target_price')
+
+        if favorite_crypto and target_price:
+            profile.favorite_crypto = favorite_crypto
+            profile.target_price = target_price
+            profile.price_alert_sent = False  # Reset alert status when updating
+            profile.save()
+            messages.success(request, f'Price alert set for {favorite_crypto} at ${target_price}')
+        else:
+            messages.error(request, 'Please select a cryptocurrency and enter a target price')
 
         return redirect('profile')
