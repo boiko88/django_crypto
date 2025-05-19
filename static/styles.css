@@ -227,10 +227,18 @@ padding: 15px 15px;
 
 /*CAROUSEL
 *********/
+.carousel-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 800px; /* Пример: ограничение ширины */
+    margin: 0 auto;
+    overflow: hidden;
+}
 
 .carousel {
     display: flex;
     flex-direction: row;
+    position: relative;
 
     width: 100%;
     max-width: 870px;
@@ -255,13 +263,12 @@ padding: 15px 15px;
     display: none; /* Скрывает полосы прокрутки в Webkit браузерах */
   }
 
-  .carousel > img {
-    scroll-snap-align: center; /* Прилипание слайдов */
-  }
+  
 
   .carousel-img {
-    min-width: 100%;
-    max-width: 100%; /* Все изображения будут адаптироваться под ширину родительского контейнера */
+    display: none;
+    width: 100%;
+    height: auto;
     flex-shrink: 0; /* Не уменьшать слайды */
     margin-top: 20px;
     cursor: pointer; /* Добавить курсор при наведении */
@@ -270,60 +277,36 @@ padding: 15px 15px;
 
   }
 
-  input[type="radio"] {
-    display: none;
+
+.carousel-img.active {
+    display: block;
 }
 
-#slide1:checked ~ .carousel { transform: translateX(0%); }   /* Первый слайд */
-        #slide2:checked ~ .carousel { transform: translateX(-100%); } /* Второй слайд */
-        #slide3:checked ~ .carousel { transform: translateX(-200%); }
-        #slide4:checked ~ .carousel { transform: translateX(-300%); }
-        #slide5:checked ~ .carousel { transform: translateX(-400%); }
-        #slide6:checked ~ .carousel { transform: translateX(-500%); }
+.dots {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    z-index: 10;
+}
 
-
-        .controls {
-            text-align: center; /* Размещаем точки по центру */
-            margin-top: 10px; /* Добавляем отступ сверху */
-        }
-
-        /* Стиль для точек переключения */
-        .controls label {
-            display: inline-block; /* Размещаем точки в строку */
-            width: 15px; /* Размер точки */
-            height: 15px;
-            background: #ffc107 ; /* Серый цвет точки */
-            border-radius: 50%; /* Делаем точки круглыми */
-            margin: 5px; /* Добавляем небольшой отступ между ними */
-            cursor: pointer; /* Делаем курсор в виде руки при наведении */
-        }
-
-
-       .controls-label {
-        background: #555;
-       }
-  /*
-  .dots {
-    text-align: center;
-    margin-top: 10px;
-  }
-
-  .dot {
-    height: 10px;
-    width: 10px;
-    margin: 0 4px;
-    background-color: #bbb;
+.dot {
+    width: 12px;
+    height: 12px;
+    background-color: #ccc;
     border-radius: 50%;
-    display: inline-block;
     cursor: pointer;
-    border: none;
-  }
+    transition: background-color 0.3s;
+}
 
-  .dot.active {
-    background-color: #ffc107;
-  }
+.dot.active {
+    background-color: #000;
+}
 
-  ***/
+
 
 
 .carousel{
@@ -369,13 +352,7 @@ scroll-snap-align: center;
 
 }
 
-.dots {
-    position: fixed;
-    left: 570px;
-    top: 600px;
-    text-align: center;
-    margin-top: 10px;
-  }
+
   .dot {
     height: 12px;
     width: 20px;

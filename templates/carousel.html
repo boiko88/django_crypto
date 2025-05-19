@@ -40,19 +40,27 @@
     <span class="visually-hidden">Next</span>
   </button>-->
 
-  <div class="carousel">
-    <img src="{% static 'images/carousel/crypto_blog.jpg' %}" alt="" class="carousel-img">
-    <img src="{% static 'images/carousel/crypto_news.jpg' %}" alt="" class="carousel-img">
-    <img src="{% static 'images/carousel/crypto_rates.jpg' %}" alt="" class="carousel-img">
-    <img src="{% static 'images/carousel/crypto_coin.jpg' %}" alt="" class="carousel-img">
-    <img src="{% static 'images/carousel/crypto_coin2.jpeg' %}" alt="" class="carousel-img">
-    <img src="{% static 'images/carousel/crypto_exchange.jpg' %}" alt="" class="carousel-img">
-
-
+  <div class="carousel-wrapper">
+    <div class="carousel">
+        <img src="{% static 'images/carousel/crypto_blog.jpg' %}" alt="" class="carousel-img active">
+        <img src="{% static 'images/carousel/crypto_news.jpg' %}" alt="" class="carousel-img">
+        <img src="{% static 'images/carousel/crypto_rates.jpg' %}" alt="" class="carousel-img">
+        <img src="{% static 'images/carousel/crypto_coin.jpg' %}" alt="" class="carousel-img">
+        <img src="{% static 'images/carousel/crypto_coin2.jpeg' %}" alt="" class="carousel-img">
+        <img src="{% static 'images/carousel/crypto_exchange.jpg' %}" alt="" class="carousel-img">
+        
+        <!-- Индикаторы в виде точек, внутри .carousel -->
+        <div class="dots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+            <span class="dot" data-index="3"></span>
+            <span class="dot" data-index="4"></span>
+            <span class="dot" data-index="5"></span>
+        </div>
+    </div>
 </div>
-
 <!--<div class="carousel-btn">
   <button class="carousel-prev-btn">Prev</button>
   <button class="carousel-next-btn">Next
   </button>-->
-</div>
