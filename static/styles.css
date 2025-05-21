@@ -152,6 +152,8 @@ padding: 15px 15px;
 
 }
 
+
+
 .register__tittle {
     margin-bottom: 40px;
 }
@@ -232,7 +234,15 @@ padding: 15px 15px;
     width: 100%;
     max-width: 800px; /* Пример: ограничение ширины */
     margin: 0 auto;
-    overflow: hidden;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none; /* Для IE */
+    scrollbar-width: none; /* Для Firefox */
+    scroll-behavior: smooth;
+    overflow-x: scroll; 
+    scroll-snap-type: x mandatory; /* Для прилипания слайдов */
+    white-space: nowrap;  
+
 }
 
 .carousel {
@@ -242,12 +252,13 @@ padding: 15px 15px;
 
     width: 100%;
     max-width: 870px;
-
+    -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none; /* Для IE */
     scrollbar-width: none; /* Для Firefox */
     scroll-behavior: smooth;
-    overflow-x: scroll; /* Для горизонтальной прокрутки */
+    overflow-x: scroll; 
     scroll-snap-type: x mandatory; /* Для прилипания слайдов */
+    white-space: nowrap;  
   }
 
   .carousel__block {
@@ -266,8 +277,8 @@ padding: 15px 15px;
   
 
   .carousel-img {
-    display: none;
-    width: 100%;
+    display: inline-block;
+    min-width: 100%;
     height: auto;
     flex-shrink: 0; /* Не уменьшать слайды */
     margin-top: 20px;
